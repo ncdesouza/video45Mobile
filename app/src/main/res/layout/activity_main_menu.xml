@@ -26,7 +26,6 @@
         android:textColor="@color/textColor"
         android:background="@color/loginBtn"
         android:onClick="loginPress"/>
-
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -41,7 +40,6 @@
         android:textColor="@color/textColor"
         android:background="@color/signUpBtn"
         android:onClick="signUpPress"/>
-
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
