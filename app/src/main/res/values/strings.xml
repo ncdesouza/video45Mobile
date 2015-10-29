@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">video45</string>
+    <!-- Strings related to the main menu page -->
     <string name="login">Log In With An Existing Account</string>
     <string name="signUp">Sign Up</string>
-
+    <!-- Strings related to the ign Up Process -->
+    <string name="photo_select">Select Photo</string>
+    <string name="continue_">Continue</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -15,6 +18,4 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_main_menu">MainMenuActivity</string>
-    <string name="title_activity_sign_up">SignUpActivity</string>
 </resources>

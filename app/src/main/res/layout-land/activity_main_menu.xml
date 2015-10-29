@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.video45.video45.MainMenuActivity"
+    android:background="#000000"
+    android:layout_weight="10">
+
+    <VideoView
+        android:id="@+id/menuVideo"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"/>
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="275dp"
+        android:padding="30dp"
+        android:text="@string/login"
+        android:textColor="@color/textColor"
+        android:background="@color/loginBtn"
+        android:onClick="loginPress"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:id="@+id/signUpBtn"
+        android:padding="30dp"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signUp"
+        android:textColor="@color/textColor"
+        android:background="@color/signUpBtn"
+        android:onClick="signUpPress"
+        android:layout_alignTop="@+id/loginBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp" />
+</RelativeLayout>

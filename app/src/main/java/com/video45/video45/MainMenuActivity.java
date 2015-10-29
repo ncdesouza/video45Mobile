@@ -6,8 +6,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.net.Uri;
-import android.widget.MediaController;
 import android.widget.VideoView;
+/** @author Matthew Rosettis */
 
 public class MainMenuActivity extends Activity {
 
