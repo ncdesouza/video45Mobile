@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="textColor">#F4F4F4</color>
+    <color name="loginBtn">#C414D3</color>
+    <color name="signUpBtn">#BD180B</color>
 </resources>
