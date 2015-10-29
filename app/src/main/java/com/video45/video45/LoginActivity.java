@@ -333,7 +333,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 //            String body = "{\"email\":\"" + mEmail + "\",\"password\":\"" + mPassword + "\"}";
             try {
-                URL url = new URL("http://10.0.2.2:5000/api/login");
+                URL url = new URL("http://video45.cloudapp.com/api/login");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(15000);
                 conn.setConnectTimeout(15000);
@@ -356,7 +356,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     String token = (String) res.get("token");
 
 
-                    URL url2 = new URL("http://10.0.2.2:5000/api/test");
+                    URL url2 = new URL("http://video45.cloudapp.com/api/test");
                     HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
                     conn2.setReadTimeout(15000);
                     conn2.setConnectTimeout(15000);
