@@ -25,7 +25,6 @@
         android:text="@string/login"
         android:textColor="@color/textColor"
         android:background="@color/loginBtn"
-
         android:onClick="loginPress"/>
 
     <TextView
@@ -41,7 +40,6 @@
         android:text="@string/signUp"
         android:textColor="@color/textColor"
         android:background="@color/signUpBtn"
-
         android:onClick="signUpPress"/>
 
     <TextView
