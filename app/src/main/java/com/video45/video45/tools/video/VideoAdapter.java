@@ -59,6 +59,7 @@ public class VideoAdapter extends BaseAdapter {
 
         VideoView videoView  = (VideoView) convertView.findViewById(R.id.videoPlayer);
         videoView.setVideoURI(Uri.parse(video.getUrl()));
+        videoView.start();
 
         TextView lblTitle = (TextView) convertView.findViewById(R.id.lblTitle);
         lblTitle.setText(video.getTitle());
