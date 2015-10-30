@@ -45,7 +45,7 @@ public class MainMenuActivity extends Activity {
         vidAddress[0] =
                 "http://video45.cloudapp.net/public/vid/dock.mp4";
         vidAddress[1]=
-                "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+                "http://video45.cloudapp.net/public/vid/river.mp4";
         Uri vidUri = Uri.parse(vidAddress[0]);
         vidView.setVideoURI(vidUri);
         vidView.start();

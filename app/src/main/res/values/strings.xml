@@ -1,4 +1,5 @@
 <resources>
+    <string name="test">Test Text</string>
     <string name="app_name">video45</string>
     <!-- Strings related to the main menu page -->
     <string name="action_settings">Settings</string>
