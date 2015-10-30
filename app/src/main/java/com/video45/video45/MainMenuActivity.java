@@ -8,7 +8,7 @@ import android.view.View;
 import android.net.Uri;
 import android.widget.VideoView;
 
-import com.video45.video45.Login.LoginActivity;
+import com.video45.video45.login.LoginActivity;
 
 /** @author Matthew Rosettis */
 

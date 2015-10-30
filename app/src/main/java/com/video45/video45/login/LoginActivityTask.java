@@ -1,4 +1,4 @@
-package com.video45.video45.Login;
+package com.video45.video45.login;
 
 /**
  * Created by nicholas on 30/10/15.
@@ -73,6 +73,7 @@ public class LoginActivityTask extends AsyncTask<Void, Void, JSONObject> {
                 try {
                     br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                     JSONObject res = new JSONObject(br.readLine());
+                    return res;
                 } catch (IOException | JSONException e1) {
                     e1.printStackTrace();
                 }
@@ -99,6 +100,7 @@ public class LoginActivityTask extends AsyncTask<Void, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(final JSONObject success) {
+        System.out.println(success.toString());
         try {
             if (success != null && success.getBoolean("success")) {
                 listener.success(success.getString("token"));

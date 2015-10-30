@@ -1,4 +1,4 @@
-package com.video45.video45.Login;
+package com.video45.video45.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -29,7 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.video45.video45.Profile.ProfileActivity;
+import com.video45.video45.profile.ProfileActivity;
 import com.video45.video45.R;
 
 import java.util.ArrayList;
@@ -319,20 +319,3 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 }
 
-//BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//JSONObject res = new JSONObject(br.readLine());
-//String token = (String) res.get("token");
-//
-//
-//URL url2 = new URL(host + "/api/test");
-//HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
-//conn2.setReadTimeout(15000);
-//        conn2.setConnectTimeout(15000);
-//        conn2.setRequestMethod("GET");
-//
-//        conn2.setRequestProperty("Authorization", token);
-//
-//        if (conn2.getResponseCode() == HttpURLConnection.HTTP_OK) {
-//        BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
-//        System.out.println(br2.readLine());
-//        }

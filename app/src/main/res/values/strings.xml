@@ -20,6 +20,7 @@
     </string>
     <string name="dev_user">user1@test.com</string>
     <string name="dev_password">test</string>
-    <!--<string name="dev_url">http://video45.cloudapp.net</string>-->
-    <string name="dev_url">http://10.0.2.2:5000</string>
+    <string name="dev_url">http://video45.cloudapp.net</string>
+    <!--<string name="dev_url">http://10.0.2.2:5000</string>-->
+    <string name="profile_picture_content_description">profile picture</string>
 </resources>

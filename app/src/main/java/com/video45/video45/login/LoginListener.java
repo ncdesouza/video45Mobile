@@ -1,4 +1,4 @@
-package com.video45.video45.Login;
+package com.video45.video45.login;
 
 /**
  * Created by nicholas on 30/10/15.
