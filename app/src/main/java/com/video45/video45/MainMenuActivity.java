@@ -41,12 +41,6 @@ public class MainMenuActivity extends Activity {
     public void backgroundVideo(){
         String[] vidAddress = new String[2];
         vidView = (VideoView)findViewById(R.id.menuVideo);
-        //Video Loop
-        vidView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-                vidView.start(); //need to make transition seamless.
-            }
-        });
         //TODO Add more videos and implement looping
         vidAddress[0] =
                 "http://video45.cloudapp.net/public/vid/dock.mp4";
@@ -55,5 +49,16 @@ public class MainMenuActivity extends Activity {
         Uri vidUri = Uri.parse(vidAddress[0]);
         vidView.setVideoURI(vidUri);
         vidView.start();
+
+        if(vidView.getCurrentPosition()- vidView.getDuration() == 100){
+            vidView.seekTo(0);
+        }
+        //Video Loop
+        vidView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                //vidView.seekTo(0);
+                vidView.start(); //need to make transition seamless.
+            }
+        });
     }
 }

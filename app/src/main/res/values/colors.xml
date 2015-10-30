@@ -7,4 +7,5 @@
     <color name="loginBtn">#C414D3</color>
     <color name="signUpBtn">#BD180B</color>
     <color name="choiceBtn">#C1BA57</color>
+    <color name="black">#000000</color>
 </resources>
