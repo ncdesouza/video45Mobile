@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.video45.video45.R;
+import com.video45.video45.tools.image.ImageTask;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,8 @@ public class VideoAdapter extends BaseAdapter {
         }
 
         ImageView profiePicture = (ImageView) convertView.findViewById(R.id.profilePicture);
-        profiePicture.setImageURI(Uri.parse(video.getProfilePictureUrl()));
+        ImageTask imageTask = new ImageTask(profiePicture);
+        imageTask.execute(video.getProfilePictureUrl());
 
         TextView lblAuthor = (TextView) convertView.findViewById(R.id.lblAuthor);
         lblAuthor.setText(video.getAuthor());
@@ -60,7 +62,6 @@ public class VideoAdapter extends BaseAdapter {
         VideoView videoView  = (VideoView) convertView.findViewById(R.id.videoPlayer);
         videoView.setVideoURI(Uri.parse(video.getUrl()));
         videoView.setFocusableInTouchMode(true);
-//        videoView.set;
         videoView.start();
 
         TextView lblTitle = (TextView) convertView.findViewById(R.id.lblTitle);
