@@ -29,4 +29,13 @@
     <string name="dev_url">http://video45.cloudapp.net</string>
     <!--<string name="dev_url">http://10.0.2.2:5000</string>-->
     <string name="profile_picture_content_description">profile picture</string>
+    <string name="nav_open">open</string>
+    <string name="nav_close">close</string>
+
+    <string-array name="nav_options">
+        <item>Public</item>
+        <item>Personal</item>
+        <item>Profile</item>
+        <item>Logout</item>
+    </string-array>
 </resources>
