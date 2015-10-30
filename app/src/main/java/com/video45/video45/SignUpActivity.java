@@ -1,6 +1,8 @@
 package com.video45.video45;
 
 import android.app.AlertDialog;
+import android.app.Application;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,7 +17,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,11 +36,13 @@ import java.util.Locale;
 public class SignUpActivity extends Activity {
     ImageView viewImage;
     Button b;
+    Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        //Setting an onClick for changing the profile image
         b=(Button)findViewById(R.id.btnSelectPhoto);
         viewImage=(ImageView)findViewById(R.id.viewImage);
         b.setOnClickListener(new View.OnClickListener() {
@@ -43,10 +51,55 @@ public class SignUpActivity extends Activity {
                 selectImage();
             }
         });
+        //Setting an onClick for continuing with the sign up process
+        continueButton = (Button)findViewById(R.id.btnContinueSignUp1);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                //Retrieving inputted values for username and password
+                EditText username = (EditText) findViewById(R.id.username);
+                EditText passOne = (EditText) findViewById(R.id.passInitial);
+                EditText passTwo = (EditText) findViewById(R.id.passConfirm);
+                //Check if the fields are valid
+                boolean userCheck = validateUser(username.getText().toString());
+                boolean passCheck = validatePass(passOne.getText().toString(), passTwo.getText().toString());
+                //Conditional check to see if all requirements are met
+                if (userCheck && passCheck) {
+                    //TODO Assign the username, password, and picture to an account and add that account to the database
+//                    Intent registered = new Intent(this, PersonalFeed.class);
+//                    startActivity(registered);
+                    Toast.makeText(getApplicationContext(),
+                            "Started from the bottom, now we here",
+                            Toast.LENGTH_SHORT).show();
+                } else if (!passCheck) {
+                    //display in short period of time
+                    Toast.makeText(getApplicationContext(),
+                            "Passwords do not match, try again",
+                            Toast.LENGTH_SHORT).show();
+                } else if (!userCheck) {
+                    //display in short period of time
+                    Toast.makeText(getApplicationContext(),
+                            "Username is invalid, please use only lowercase " +
+                                    "and uppercase letters, numbers, +, -, *, .",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
-
+    //Checking that the desired username does not contain
+    private boolean validateUser(String username){
+        boolean userVerify = false;
+        //TODO Check the server if the username isn't already taken, and doesn't contain explicit words
+        if(!username.contains("shit")){ //Add more disallowed words and maybe reference a table instead
+            userVerify = true;
+        }
+        return userVerify;
+    }
+    private boolean validatePass(String passInit, String passCheck){
+        Log.d("password 1",passInit);
+        Log.d("password 2",passCheck);
+        return passInit.equals(passCheck);
+    }
     private void selectImage() {
-
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
@@ -67,15 +120,11 @@ public class SignUpActivity extends Activity {
 //                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                         startActivityForResult(intent, 1);
 //                    }
-                }
-            }
-
-            else if(options[item].equals("Choose from Gallery"))
-            {
-                Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 2);
-            }
-            else if (options[item].equals("Cancel")) {
+                    }
+                } else if (options[item].equals("Choose from Gallery")) {
+                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, 2);
+                } else if (options[item].equals("Cancel")) {
                 dialog.dismiss();
             }
         }
@@ -109,6 +158,7 @@ public class SignUpActivity extends Activity {
             }
         }
     }
+    //Attempting to save thier photo to their phone and then display the Full-Sized photo
     String photoPath;
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -127,7 +177,6 @@ public class SignUpActivity extends Activity {
         galleryAddPic();
         return image;
     }
-
     private void galleryAddPic() {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(photoPath);

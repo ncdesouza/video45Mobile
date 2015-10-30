@@ -6,4 +6,5 @@
     <color name="textColor">#F4F4F4</color>
     <color name="loginBtn">#C414D3</color>
     <color name="signUpBtn">#BD180B</color>
+    <color name="choiceBtn">#C1BA57</color>
 </resources>

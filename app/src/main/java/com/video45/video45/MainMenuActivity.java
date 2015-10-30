@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.net.Uri;
 import android.widget.VideoView;
@@ -13,6 +14,7 @@ import com.video45.video45.login.LoginActivity;
 /** @author Matthew Rosettis */
 
 public class MainMenuActivity extends Activity {
+    VideoView vidView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +38,8 @@ public class MainMenuActivity extends Activity {
         Intent signUpIntent = new Intent(this, SignUpActivity.class);
         startActivity(signUpIntent);
     }
-    VideoView vidView;
     public void backgroundVideo(){
-        String vidAddress;
+        String[] vidAddress = new String[2];
         vidView = (VideoView)findViewById(R.id.menuVideo);
         //Video Loop
         vidView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -46,12 +47,12 @@ public class MainMenuActivity extends Activity {
                 vidView.start(); //need to make transition seamless.
             }
         });
-        //TODO Make this into an array and add more videos to be looped
-        vidAddress =
-//            "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
-            "http://video45.cloudapp.net/public/vid/dock.mp4";
-
-        Uri vidUri = Uri.parse(vidAddress);
+        //TODO Add more videos and implement looping
+        vidAddress[0] =
+                "http://video45.cloudapp.net/public/vid/dock.mp4";
+        vidAddress[1]=
+                "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+        Uri vidUri = Uri.parse(vidAddress[0]);
         vidView.setVideoURI(vidUri);
         vidView.start();
     }

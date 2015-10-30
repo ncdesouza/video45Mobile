@@ -6,15 +6,15 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="10dp"
     tools:context="com.video45.video45.SignUpActivity"
     android:weightSum="1">
 
     <LinearLayout
         android:id="@+id/subLinear1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
         android:layout_weight="0.5">
@@ -36,7 +36,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="5dp" >
