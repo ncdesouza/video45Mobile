@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.net.Uri;
 import android.widget.VideoView;
+
+import com.video45.video45.Login.LoginActivity;
+
 /** @author Matthew Rosettis */
 
 public class MainMenuActivity extends Activity {

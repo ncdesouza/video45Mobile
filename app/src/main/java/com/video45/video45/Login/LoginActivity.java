@@ -1,8 +1,9 @@
-package com.video45.video45;
+package com.video45.video45.Login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -13,7 +14,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -29,51 +29,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.video45.video45.Profile.ProfileActivity;
+import com.video45.video45.R;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, LoginListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    private LoginActivityTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -204,7 +182,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new LoginActivityTask(this ,email, password);
             mAuthTask.execute((Void) null);
         }
     }
@@ -289,6 +267,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
+    @Override
+    public void success(String token) {
+        mAuthTask = null;
+        showProgress(false);
+        Intent profile = new Intent(this, ProfileActivity.class);
+        profile.putExtra("token", token);
+        startActivity(profile);
+        finish();
+    }
+
+    @Override
+    public void failure() {
+        mAuthTask = null;
+        showProgress(false);
+        mPasswordView.setError(getString(R.string.error_incorrect_password));
+        mPasswordView.requestFocus();
+    }
+
+    @Override
+    public void cancel() {
+        mAuthTask = null;
+        showProgress(false);
+    }
+
+    @Override
+    public String getUrl() {
+        return getString(R.string.dev_url);
+    }
+
     private interface ProfileQuery {
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
@@ -309,127 +316,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setAdapter(adapter);
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            HashMap<String, String> postData = new HashMap<>(2);
-            postData.put("email", mEmail);
-            postData.put("password", mPassword);
-
-//            String body = "{\"email\":\"" + mEmail + "\",\"password\":\"" + mPassword + "\"}";
-            try {
-                URL url = new URL("http://video45.cloudapp.com/api/login");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(15000);
-                conn.setConnectTimeout(15000);
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                bw.write(getPostDataString(postData));
-                bw.flush();
-                bw.close();
-                os.close();
-
-                int responseCode = conn.getResponseCode();
-
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    JSONObject res = new JSONObject(br.readLine());
-                    String token = (String) res.get("token");
-
-
-                    URL url2 = new URL("http://video45.cloudapp.com/api/test");
-                    HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
-                    conn2.setReadTimeout(15000);
-                    conn2.setConnectTimeout(15000);
-                    conn2.setRequestMethod("POST");
-                    conn2.setDoOutput(true);
-                    conn2.setDoInput(true);
-
-                    HashMap<String, String> postData2 = new HashMap<>();
-                    postData2.put("token", token);
-
-                    OutputStream os2 = conn2.getOutputStream();
-                    BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(os2, "UTF-8"));
-                    bw2.write(getPostDataString(postData2));
-                    bw2.flush();
-                    bw2.close();
-                    os2.close();
-
-                    if (conn2.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
-                        System.out.println(br2.readLine());
-                    }
-
-                } else {
-                    return false;
-                }
-
-                conn.disconnect();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-//                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-
-        private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
-            StringBuilder result = new StringBuilder();
-            boolean first = true;
-            for(Map.Entry<String, String> entry : params.entrySet()){
-                if (first)
-                    first = false;
-                else
-                    result.append("&");
-
-                result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-            }
-
-            return result.toString();
-        }
-    }
 }
 
+//BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//JSONObject res = new JSONObject(br.readLine());
+//String token = (String) res.get("token");
+//
+//
+//URL url2 = new URL(host + "/api/test");
+//HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
+//conn2.setReadTimeout(15000);
+//        conn2.setConnectTimeout(15000);
+//        conn2.setRequestMethod("GET");
+//
+//        conn2.setRequestProperty("Authorization", token);
+//
+//        if (conn2.getResponseCode() == HttpURLConnection.HTTP_OK) {
+//        BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+//        System.out.println(br2.readLine());
+//        }
