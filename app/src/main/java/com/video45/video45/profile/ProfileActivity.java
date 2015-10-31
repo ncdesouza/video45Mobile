@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.video45.video45.R;
 import com.video45.video45.tools.nav.NavItemClickListener;
