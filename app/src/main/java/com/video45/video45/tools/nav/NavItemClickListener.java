@@ -7,7 +7,7 @@ import android.widget.ListView;
 /**
  * Created by nicholas on 30/10/15.
  */
-public class DrawerItemClickListener implements ListView.OnItemClickListener {
+public class NavItemClickListener implements ListView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView parent, View view, int position, long id) {
         selectItem(position);
