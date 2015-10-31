@@ -3,7 +3,7 @@
     <string name="app_name">video45</string>
     <!-- Strings related to the main menu page -->
     <string name="action_settings">Settings</string>
-    <string name="login">Log In With An Existing Account</string>
+    <string name="login">Log In</string>
     <string name="signUp">Sign Up</string>
     <!-- Strings related to the Sign Up Process -->
     <string name="photo_select">Select Photo</string>
