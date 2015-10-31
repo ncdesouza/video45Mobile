@@ -29,7 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.video45.video45.profile.ProfileActivity;
+import com.video45.video45.StartActivity;
 import com.video45.video45.R;
 
 import java.util.ArrayList;
@@ -39,6 +39,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
+ * @author Nicholas De Souza
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, LoginListener {
 
@@ -271,9 +272,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void success(String token) {
         mAuthTask = null;
         showProgress(false);
-        Intent profile = new Intent(this, ProfileActivity.class);
-        profile.putExtra("token", token);
-        startActivity(profile);
+        Intent successfulLogin = new Intent();
+        successfulLogin.putExtra(StartActivity.TOKEN, token);
+        setResult(RESULT_OK, successfulLogin);
         finish();
     }
 
@@ -289,6 +290,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void cancel() {
         mAuthTask = null;
         showProgress(false);
+        Intent canceledLogin = new Intent();
+        setResult(RESULT_CANCELED, canceledLogin);
+        finish();
     }
 
     @Override

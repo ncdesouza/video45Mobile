@@ -66,7 +66,9 @@ public class ProfileActivityTask extends AsyncTask<String, Void, Profile> {
 
                         String videoUrl = params[0] + video.getString("videoURL");
 
-                        videos.add(new Video(title, username, profilePicture, videoUrl));
+                        String videoDate = video.getString("date");
+
+                        videos.add(new Video(title, username, profilePicture, videoUrl, videoDate));
                     }
 
                     return new Profile(profileUsername, profileProfilePicture, videos);

@@ -60,9 +60,12 @@ public class VideoAdapter extends BaseAdapter {
         lblAuthor.setText(video.getAuthor());
 
         VideoView videoView  = (VideoView) convertView.findViewById(R.id.videoPlayer);
-        videoView.setVideoURI(Uri.parse(video.getUrl()));
+        videoView.setVideoURI(Uri.parse(video.getVideoUrl()));
         videoView.setFocusableInTouchMode(true);
         videoView.start();
+
+        TextView date = (TextView) convertView.findViewById(R.id.date);
+        date.setText(video.getDate());
 
         TextView lblTitle = (TextView) convertView.findViewById(R.id.lblTitle);
         lblTitle.setText(video.getTitle());
