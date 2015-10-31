@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.video45.video45.profile.ProfileFragment;
+import com.video45.video45.settings.SettingsFragment;
 import com.video45.video45.tools.nav.NavItemClickListener;
 import com.video45.video45.tools.nav.NavMenuAdapter;
 import com.video45.video45.tools.nav.NavMenuItem;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         navList.setAdapter(new NavMenuAdapter(this, R.layout.nav_list_item, navOptions));
-        navList.setOnItemClickListener(new NavItemClickListener());
+        navList.setOnItemClickListener(new NavItemClickListener(this));
 
         navToggle = new NavToggle(this, navDrawer, toolbar, R.string.nav_open, R.string.nav_close);
         navDrawer.setDrawerListener(navToggle);
@@ -105,15 +106,23 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        case id: 1 {
-//
-//        }
+        int id = item.getItemId();
+        System.out.println(id);
+        switch (id) {
+            case 3: {
+                SettingsFragment settingsFragment = new SettingsFragment();
+
+                settingsFragment.setArguments(getIntent().getExtras());
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, settingsFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
 }
