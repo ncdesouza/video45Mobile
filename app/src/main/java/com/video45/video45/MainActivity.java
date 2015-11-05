@@ -9,11 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.video45.video45.profile.ProfileFragment;
-import com.video45.video45.settings.SettingsFragment;
 import com.video45.video45.tools.nav.NavItemClickListener;
 import com.video45.video45.tools.nav.NavMenuAdapter;
 import com.video45.video45.tools.nav.NavMenuItem;
@@ -29,11 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        DrawerLayout navDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ListView navList = (ListView) findViewById(R.id.left_drawer);
-
+        // Toolbar Setup
         toolbar = (Toolbar)findViewById(R.id.tool_bar);
         toolbar.setLogo(R.drawable.ic_logo);
         setSupportActionBar(toolbar);
@@ -41,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         if (bar != null) {
             bar.setDisplayShowTitleEnabled(false);
         }
+
+        // Navigation Drawer Setup
+        DrawerLayout navDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ListView navList = (ListView) findViewById(R.id.left_drawer);
 
         Resources res = getResources();
         String[] navItems = res.getStringArray(R.array.nav_options);
@@ -58,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         navList.setAdapter(new NavMenuAdapter(this, R.layout.nav_list_item, navOptions));
-        navList.setOnItemClickListener(new NavItemClickListener(this));
+        navList.setOnItemClickListener(new NavItemClickListener(this, navDrawer, navList));
 
         navToggle = new NavToggle(this, navDrawer, toolbar, R.string.nav_open, R.string.nav_close);
         navDrawer.setDrawerListener(navToggle);
 
+
+        // Initial Fragment Setup
         if (findViewById(R.id.content) != null) {
 
             if (savedInstanceState != null) {
@@ -77,9 +78,7 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.content, profileFragment)
                     .commit();
-
         }
-
     }
 
     @Override
@@ -99,30 +98,6 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         navToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        System.out.println(id);
-        switch (id) {
-            case 3: {
-                SettingsFragment settingsFragment = new SettingsFragment();
-
-                settingsFragment.setArguments(getIntent().getExtras());
-
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, settingsFragment);
-                transaction.addToBackStack(null);
-
-                transaction.commit();
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }
