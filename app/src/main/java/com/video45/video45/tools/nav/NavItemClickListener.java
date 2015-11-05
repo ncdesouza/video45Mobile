@@ -38,9 +38,9 @@ public class NavItemClickListener implements ListView.OnItemClickListener {
         int id = position;
         System.out.println(id);
         switch (id) {
-            case 2: {
+            /*case 2: {
                 switchView(new ProfileFragment());
-            }
+            }*/
             case 3: {
                 switchView(new SettingsFragment());
             }
