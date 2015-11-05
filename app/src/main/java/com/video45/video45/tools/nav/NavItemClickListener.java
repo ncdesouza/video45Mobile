@@ -20,6 +20,7 @@ public class NavItemClickListener implements ListView.OnItemClickListener {
     private AppCompatActivity activity;
     private DrawerLayout navDrawer;
     private ListView navList;
+    private int test;
 
     public NavItemClickListener(AppCompatActivity activity, DrawerLayout navDrawer, ListView navList) {
         this.activity = activity;
