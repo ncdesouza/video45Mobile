@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:padding="10dp"
-    tools:context="com.video45.video45.signup.SignUpActivity"
+    tools:context="com.video45.signup.SignUpActivity"
     android:weightSum="1">
 
     <LinearLayout
