@@ -31,6 +31,8 @@ import android.widget.TextView;
 
 import com.video45.video45.StartActivity;
 import com.video45.video45.R;
+import com.video45.video45.tools.db.Video45DbHelper;
+import com.video45.video45.tools.db.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -272,8 +274,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void success(String token) {
         mAuthTask = null;
         showProgress(false);
+
+        Video45DbHelper db = new Video45DbHelper(getApplicationContext());
+        User user = new User(mEmailView.getText().toString(), mPasswordView.getText().toString(), token);
+        db.updateOrCreateUser(user);
+
         Intent successfulLogin = new Intent();
         successfulLogin.putExtra(StartActivity.TOKEN, token);
+
         setResult(RESULT_OK, successfulLogin);
         finish();
     }
