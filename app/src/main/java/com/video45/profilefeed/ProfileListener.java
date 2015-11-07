@@ -4,5 +4,5 @@ package com.video45.profilefeed;
  * Created by nicholas on 30/10/15.
  */
 public interface ProfileListener {
-    public void showProfile(Profile profile);
+    void showProfile(Profile profile);
 }

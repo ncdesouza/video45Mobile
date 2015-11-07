@@ -3,10 +3,12 @@ package com.video45;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,14 +16,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.video45.homefeed.HomeFeedFragment;
 import com.video45.profilefeed.ProfileFeedFragment;
+import com.video45.publicfeed.PublicFeedFragment;
 import com.video45.settings.SettingsFragment;
+import com.video45.tools.tabs.FeedPagerAdapter;
 import com.video45.video45.R;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener{
 
     private DrawerLayout mDrawerLayout;
-    FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        fragmentManager = getSupportFragmentManager();
+        viewPager = (ViewPager)findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout)findViewById(R.id.tablayout);
+        tabLayout.setupWithViewPager(viewPager);
+        setupTabIcons();
+
         // Initial Fragment Setup
         if (findViewById(R.id.content) != null) {
 
@@ -52,11 +67,26 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             profileFeedFragment.setArguments(getIntent().getExtras());
 
-            fragmentManager = getSupportFragmentManager();
+
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.content, profileFeedFragment, getResources().getString(R.string.nav_item_profile))
                     .commit();
         }
+
+    }
+
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_action_action_language);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_action_action_favorite_outline);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_action_social_person_outline);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        FeedPagerAdapter adapter = new FeedPagerAdapter(fragmentManager);
+        adapter.addFrag(PublicFeedFragment.newInstance(), "Public");
+        adapter.addFrag(HomeFeedFragment.newInstance(), "Home");
+        adapter.addFrag(ProfileFeedFragment.newInstance(), "Profile");
+        viewPager.setAdapter(adapter);
     }
 
     @Override
@@ -89,9 +119,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         System.out.println(id);
         System.out.println(R.id.nav_item_profile);
         switch (id) {
+            case R.id.nav_item_public:
+                switchView(PublicFeedFragment.newInstance(), getString(R.string.nav_item_public));
+                return true;
+
             case R.id.nav_item_profile:
                 switchView(new ProfileFeedFragment(), getResources().getString(R.string.nav_item_profile));
                 return true;
+
             case R.id.nav_item_settings:
                 switchView(new SettingsFragment(), getResources().getString(R.string.nav_item_settings));
                 return true;
@@ -107,4 +142,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 .addToBackStack(null)
                 .commit();
     }
+
+
 }

@@ -22,6 +22,15 @@ public class ProfileFeedFragment extends Fragment implements ProfileListener {
     Activity activity;
     RecyclerView recyclerView;
 
+    public ProfileFeedFragment() {
+    }
+
+    public static ProfileFeedFragment newInstance() {
+        return new ProfileFeedFragment();
+    }
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
