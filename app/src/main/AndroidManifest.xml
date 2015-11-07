@@ -57,6 +57,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.video45.StartActivity" />
         </activity>
+        <activity
+            android:name="com.video45.video.editor.VideoEditorActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_video_editor"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="com.video45.video.capture.VideoCaptureActivity"
+            android:label="@string/title_activity_video_capture" >
+        </activity>
+        <activity
+            android:name="com.video45.video.upload.VideoUploadActivity"
+            android:label="@string/title_activity_video_upload" >
+        </activity>
     </application>
 
 </manifest>

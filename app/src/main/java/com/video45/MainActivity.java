@@ -20,7 +20,7 @@ import com.video45.homefeed.HomeFeedFragment;
 import com.video45.profilefeed.ProfileFeedFragment;
 import com.video45.publicfeed.PublicFeedFragment;
 import com.video45.settings.SettingsFragment;
-import com.video45.tools.tabs.FeedPagerAdapter;
+import com.video45.tools.tab.FeedPagerAdapter;
 import com.video45.video45.R;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener{

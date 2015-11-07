@@ -8,4 +8,6 @@
     <color name="signUpBtn">#BD180B</color>
     <color name="choiceBtn">#C1BA57</color>
     <color name="black">#000000</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
