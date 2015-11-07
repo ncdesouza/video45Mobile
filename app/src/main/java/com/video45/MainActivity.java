@@ -21,9 +21,10 @@ import com.video45.profilefeed.ProfileFeedFragment;
 import com.video45.publicfeed.PublicFeedFragment;
 import com.video45.settings.SettingsFragment;
 import com.video45.tools.tabs.FeedPagerAdapter;
+import com.video45.tools.tabs.TabsInterface;
 import com.video45.video45.R;
 
-public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener, TabsInterface {
 
     private DrawerLayout mDrawerLayout;
     private FragmentManager fragmentManager;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        FeedPagerAdapter adapter = new FeedPagerAdapter(fragmentManager);
+        FeedPagerAdapter adapter = new FeedPagerAdapter(fragmentManager, this);
         adapter.addFrag(PublicFeedFragment.newInstance(), "Public");
         adapter.addFrag(HomeFeedFragment.newInstance(), "Home");
         adapter.addFrag(ProfileFeedFragment.newInstance(), "Profile");
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         return false;
     }
 
-    private void switchView(Fragment fragment, String fragTag) {
+    public void switchView(Fragment fragment, String fragTag) {
         System.out.println(fragTag);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction
@@ -142,6 +143,4 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 .addToBackStack(null)
                 .commit();
     }
-
-
 }

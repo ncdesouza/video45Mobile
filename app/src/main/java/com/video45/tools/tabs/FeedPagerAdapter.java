@@ -23,16 +23,28 @@ public class FeedPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> mFragments;
     private List<String> tags;
+    private TabsInterface tabs;
 
-    public FeedPagerAdapter(FragmentManager fm) {
+    public FeedPagerAdapter(FragmentManager fm, TabsInterface tabs) {
         super(fm);
         tags = new ArrayList<>();
         mFragments = new ArrayList<>();
+        this.tabs = tabs;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return mFragments.get(position);
+
+        switch (position) {
+            case 0:
+                tabs.switchView(PublicFeedFragment.newInstance(), "PUBLIC");
+            case 1:
+                tabs.switchView(HomeFeedFragment.newInstance(), "HOME");
+            case 2:
+                tabs.switchView(ProfileFeedFragment.newInstance(), "PROFILE");
+        }
+
+        return null;
     }
 
     @Override

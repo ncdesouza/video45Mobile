@@ -17,12 +17,14 @@ import com.video45.tools.image.ImageTask;
 import com.video45.tools.video.VideoRecyclerAdapter;
 import com.video45.video45.R;
 
+
 public class ProfileFeedFragment extends Fragment implements ProfileListener {
     View profileView;
     Activity activity;
     RecyclerView recyclerView;
 
     public ProfileFeedFragment() {
+
     }
 
     public static ProfileFeedFragment newInstance() {
@@ -35,7 +37,6 @@ public class ProfileFeedFragment extends Fragment implements ProfileListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-//        String token = getArguments().getString(StartActivity.TOKEN);
         Video45DbHelper db = new Video45DbHelper(getContext());
         User user = db.getPrimaryUser();
         db.close();
@@ -82,5 +83,6 @@ public class ProfileFeedFragment extends Fragment implements ProfileListener {
         recyclerView = (RecyclerView) profileView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager((getActivity())));
         recyclerView.setAdapter(new VideoRecyclerAdapter(profile.getVideos()));
+
     }
 }
