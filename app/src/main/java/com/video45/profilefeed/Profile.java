@@ -1,4 +1,4 @@
-package com.video45.profile;
+package com.video45.profilefeed;
 
 import com.video45.tools.video.Video;
 

@@ -1,4 +1,4 @@
-package com.video45.profile;
+package com.video45.profilefeed;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,36 +9,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.video45.tools.videos.VideoRecyclerAdapter;
-import com.video45.video45.R;
-import com.video45.StartActivity;
+import com.video45.tools.db.Video45DbHelper;
+import com.video45.tools.db.models.User;
 import com.video45.tools.image.ImageTask;
-import com.video45.tools.video.VideoAdapter;
+import com.video45.tools.video.VideoRecyclerAdapter;
+import com.video45.video45.R;
 
-public class ProfileFragment extends Fragment implements ProfileListener {
+public class ProfileFeedFragment extends Fragment implements ProfileListener {
     View profileView;
     Activity activity;
-    private VideoAdapter videoAdapter;
-    private ProfileListener profileListener;
     RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-        String token = getArguments().getString(StartActivity.TOKEN);
-        getProfile(token);
+//        String token = getArguments().getString(StartActivity.TOKEN);
+        Video45DbHelper db = new Video45DbHelper(getContext());
+        User user = db.getPrimaryUser();
+        db.close();
+
+        getProfile(user.getToken());
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
-        profileView = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        profileView = inflater.inflate(R.layout.fragment_profilefeed, container, false);
         return profileView;
     }
 
@@ -72,9 +73,5 @@ public class ProfileFragment extends Fragment implements ProfileListener {
         recyclerView = (RecyclerView) profileView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager((getActivity())));
         recyclerView.setAdapter(new VideoRecyclerAdapter(profile.getVideos()));
-
-//        videoAdapter = new VideoAdapter(activity, profile.getVideos());
-//        ListView listView = (ListView)  profileView.findViewById(R.id.listView);
-//        listView.setAdapter(videoAdapter);
     }
 }

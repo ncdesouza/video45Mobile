@@ -1,14 +1,14 @@
-package com.video45.tools.videos;
+package com.video45.tools.video;
 
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+
 import com.video45.video45.R;
 import com.video45.tools.image.ImageTask;
-import com.video45.tools.video.Video;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_row, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_video, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -40,9 +40,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         holder.lblAuthor.setText(video.getAuthor());
 
-        holder.videoView.setVideoURI(Uri.parse(video.getVideoUrl()));
-        holder.videoView.setFocusableInTouchMode(true);
-        holder.videoView.start();
+        VideoPlayer videoPlayer = new VideoPlayer(holder.videoSurface, video.getVideoUrl());
 
         holder.date.setText(video.getDate());
         holder.lblTitle.setText(video.getTitle());
@@ -53,4 +51,5 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
     public int getItemCount() {
         return videos.size();
     }
+
 }

@@ -21,9 +21,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing emailcompletions."</string>
     <string name="dev_user">user1@test.com</string>
     <string name="dev_password">test</string>
     <string name="dev_url">http://video45.cloudapp.net</string>
@@ -104,7 +102,12 @@
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
-
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="settings_title">Settings</string>
+
+    <string name="nav_item_public">Public Feed</string>
+    <string name="nav_item_home">Home Feed</string>
+    <string name="nav_item_profile">Profile</string>
+    <string name="nav_item_settings">Settings</string>
+    <string name="nav_item_logout">Logout</string>
 </resources>

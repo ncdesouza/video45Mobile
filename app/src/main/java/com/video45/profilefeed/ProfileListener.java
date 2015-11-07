@@ -1,4 +1,4 @@
-package com.video45.profile;
+package com.video45.profilefeed;
 
 /**
  * Created by nicholas on 30/10/15.

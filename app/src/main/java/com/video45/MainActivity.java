@@ -1,28 +1,27 @@
 package com.video45;
 
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.ListView;
+import android.view.MenuItem;
 
+import com.video45.profilefeed.ProfileFeedFragment;
+import com.video45.settings.SettingsFragment;
 import com.video45.video45.R;
-import com.video45.profile.ProfileFragment;
-import com.video45.tools.nav.NavItemClickListener;
-import com.video45.tools.nav.NavMenuAdapter;
-import com.video45.tools.nav.NavMenuItem;
-import com.video45.tools.nav.NavToggle;
 
-import java.util.ArrayList;
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener{
 
-public class MainActivity extends AppCompatActivity {
-    private NavToggle navToggle;
-    private Toolbar toolbar;
+    private DrawerLayout mDrawerLayout;
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,39 +29,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Toolbar Setup
-        toolbar = (Toolbar)findViewById(R.id.tool_bar);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.tool_bar);
         toolbar.setLogo(R.drawable.ic_logo);
         setSupportActionBar(toolbar);
-        android.support.v7.app.ActionBar bar = getSupportActionBar();
-        if (bar != null) {
-            bar.setDisplayShowTitleEnabled(false);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // Navigation Drawer Setup
-        DrawerLayout navDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ListView navList = (ListView) findViewById(R.id.left_drawer);
-
-        Resources res = getResources();
-        String[] navItems = res.getStringArray(R.array.nav_options);
-        int[] navIcons = new int[] {
-                R.drawable.ic_action_action_language,
-                R.drawable.ic_action_toggle_star,
-                R.drawable.ic_action_social_person_outline,
-                R.drawable.ic_action_action_settings,
-                R.drawable.ic_action_av_fast_rewind
-        };
-
-        ArrayList<NavMenuItem> navOptions = new ArrayList<NavMenuItem>();
-        for(int i = 0; i < navItems.length && i < navIcons.length; i++) {
-            navOptions.add(new NavMenuItem(navIcons[i], navItems[i]));
-        }
-
-        navList.setAdapter(new NavMenuAdapter(this, R.layout.nav_list_item, navOptions));
-        navList.setOnItemClickListener(new NavItemClickListener(this, navDrawer, navList));
-
-        navToggle = new NavToggle(this, navDrawer, toolbar, R.string.nav_open, R.string.nav_close);
-        navDrawer.setDrawerListener(navToggle);
-
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         // Initial Fragment Setup
         if (findViewById(R.id.content) != null) {
@@ -70,35 +48,63 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 return;
             }
+            ProfileFeedFragment profileFeedFragment = new ProfileFeedFragment();
 
-            ProfileFragment profileFragment = new ProfileFragment();
+            profileFeedFragment.setArguments(getIntent().getExtras());
 
-            profileFragment.setArguments(getIntent().getExtras());
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.content, profileFragment)
+            fragmentTransaction.add(R.id.content, profileFeedFragment, getResources().getString(R.string.nav_item_profile))
                     .commit();
         }
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.action_settings:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        navToggle.syncState();
+    public boolean onNavigationItemSelected(MenuItem item) {
+        item.setChecked(true);
+        mDrawerLayout.closeDrawers();
+
+        int id = item.getItemId();
+        System.out.println(id);
+        System.out.println(R.id.nav_item_profile);
+        switch (id) {
+            case R.id.nav_item_profile:
+                switchView(new ProfileFeedFragment(), getResources().getString(R.string.nav_item_profile));
+                return true;
+            case R.id.nav_item_settings:
+                switchView(new SettingsFragment(), getResources().getString(R.string.nav_item_settings));
+                return true;
+        }
+        return false;
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        navToggle.onConfigurationChanged(newConfig);
+    private void switchView(Fragment fragment, String fragTag) {
+        System.out.println(fragTag);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction
+                .replace(R.id.content, fragment)
+                .addToBackStack(null)
+                .commit();
     }
-
 }

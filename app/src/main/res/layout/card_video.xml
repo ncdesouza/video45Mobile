@@ -72,14 +72,20 @@
             <!--android:layout_marginStart="@dimen/start_margin"-->
 
 
-            <VideoView
+            <!--<VideoView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_alignParentBottom="false"-->
+                <!--android:id="@+id/videoPlayer"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentStart="true" />-->
+
+            <SurfaceView
+                android:id="@+id/videoview"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="false"
-                android:id="@+id/videoPlayer"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true" />
+                android:layout_height="fill_parent" />
+
         </RelativeLayout>
 
 

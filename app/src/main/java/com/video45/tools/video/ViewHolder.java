@@ -1,10 +1,10 @@
-package com.video45.tools.videos;
+package com.video45.tools.video;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.video45.video45.R;
 
@@ -15,7 +15,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     protected final ImageView profiePicture;
     protected final TextView lblAuthor;
-    protected final VideoView videoView;
+    protected final SurfaceView videoSurface;
     protected final TextView date;
     protected final TextView lblTitle;
 
@@ -23,7 +23,9 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         profiePicture = (ImageView) itemView.findViewById(R.id.profilePicture);
         lblAuthor = (TextView) itemView.findViewById(R.id.lblAuthor);
-        videoView  = (VideoView) itemView.findViewById(R.id.videoPlayer);
+
+        videoSurface  = (SurfaceView) itemView.findViewById(R.id.videoview);
+
         date = (TextView) itemView.findViewById(R.id.date);
         lblTitle = (TextView) itemView.findViewById(R.id.lblTitle);
     }
