@@ -1,6 +1,6 @@
 package com.video45.publicfeed;
 
-import com.video45.tools.video.Video;
+import com.video45.tools.vid.VideoData;
 
 import java.util.ArrayList;
 
@@ -8,5 +8,5 @@ import java.util.ArrayList;
  * Created by nicholas on 07/11/15.
  */
 public interface PublicFeedListener {
-    void showPublicFeed(ArrayList<Video> videos);
+    void showPublicFeed(ArrayList<VideoData> videos);
 }

@@ -2,7 +2,7 @@ package com.video45.profilefeed;
 
 import android.os.AsyncTask;
 
-import com.video45.tools.video.Video;
+import com.video45.tools.vid.VideoData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +52,7 @@ public class ProfileActivityTask extends AsyncTask<String, Void, Profile> {
                     String profileUsername = data.getString("username");
                     String profileProfilePicture = params[0] + data.getString("profilePic");
 
-                    ArrayList<Video> videos = new ArrayList<Video>();
+                    ArrayList<VideoData> videos = new ArrayList<VideoData>();
                     JSONArray jsonVideos = data.getJSONArray("videos");
                     for (int i = 0; i < jsonVideos.length(); i++) {
                         JSONObject video = (JSONObject) jsonVideos.get(i);
@@ -67,7 +67,7 @@ public class ProfileActivityTask extends AsyncTask<String, Void, Profile> {
 
                         String videoDate = video.getString("date");
 
-                        videos.add(new Video(title, username, profilePicture, videoUrl, videoDate));
+                        videos.add(new VideoData(title, username, profilePicture, videoUrl, videoDate));
                     }
 
                     return new Profile(profileUsername, profileProfilePicture, videos);

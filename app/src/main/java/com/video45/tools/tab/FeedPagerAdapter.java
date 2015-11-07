@@ -1,17 +1,8 @@
-package com.video45.tools.tabs;
+package com.video45.tools.tab;
 
-import android.app.ActionBar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-
-import com.video45.homefeed.HomeFeedFragment;
-import com.video45.profilefeed.Profile;
-import com.video45.profilefeed.ProfileFeedFragment;
-import com.video45.publicfeed.PublicFeedFragment;
 
 import java.util.ArrayList;
 import java.util.List;

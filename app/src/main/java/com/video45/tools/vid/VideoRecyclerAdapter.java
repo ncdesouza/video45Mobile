@@ -1,4 +1,4 @@
-package com.video45.tools.video;
+package com.video45.tools.vid;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 
 import com.video45.video45.R;
-import com.video45.tools.image.ImageTask;
+import com.video45.tools.img.ImageTask;
 
 import java.util.ArrayList;
 
@@ -17,9 +17,9 @@ import java.util.ArrayList;
  */
 public class VideoRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-    private ArrayList<Video> videos;
+    private ArrayList<VideoData> videos;
 
-    public VideoRecyclerAdapter(ArrayList<Video> videos) {
+    public VideoRecyclerAdapter(ArrayList<VideoData> videos) {
         this.videos = videos;
     }
 
@@ -32,18 +32,18 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Video video = videos.get(position);
+        VideoData videoData = videos.get(position);
 
         ImageTask imageTask = new ImageTask(holder.profiePicture);
 
-        imageTask.execute(video.getProfilePictureUrl());
+        imageTask.execute(videoData.getProfilePictureUrl());
 
-        holder.lblAuthor.setText(video.getAuthor());
+        holder.lblAuthor.setText(videoData.getAuthor());
 
-        VideoPlayer videoPlayer = new VideoPlayer(holder.videoSurface, video.getVideoUrl());
+        VideoPlayer videoPlayer = new VideoPlayer(holder.videoSurface, videoData.getVideoUrl());
 
-        holder.date.setText(video.getDate());
-        holder.lblTitle.setText(video.getTitle());
+        holder.date.setText(videoData.getDate());
+        holder.lblTitle.setText(videoData.getTitle());
 
     }
 

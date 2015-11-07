@@ -1,6 +1,6 @@
 package com.video45.profilefeed;
 
-import com.video45.tools.video.Video;
+import com.video45.tools.vid.VideoData;
 
 import java.util.ArrayList;
 
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class Profile {
     private String username;
     private String profilePic;
-    private ArrayList<Video> videos;
+    private ArrayList<VideoData> videos;
 
-    public Profile(String username, String profilePic, ArrayList<Video> videos) {
+    public Profile(String username, String profilePic, ArrayList<VideoData> videos) {
         this.username = username;
         this.profilePic = profilePic;
         this.videos = videos;
@@ -26,7 +26,7 @@ public class Profile {
         return profilePic;
     }
 
-    public ArrayList<Video> getVideos() {
+    public ArrayList<VideoData> getVideos() {
         return videos;
     }
 }

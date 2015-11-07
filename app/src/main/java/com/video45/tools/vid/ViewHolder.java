@@ -1,4 +1,4 @@
-package com.video45.tools.video;
+package com.video45.tools.vid;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.SurfaceView;

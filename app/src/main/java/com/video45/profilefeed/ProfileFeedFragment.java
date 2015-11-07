@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.video45.tools.db.Video45DbHelper;
 import com.video45.tools.db.models.User;
-import com.video45.tools.image.ImageTask;
-import com.video45.tools.video.VideoRecyclerAdapter;
+import com.video45.tools.img.ImageTask;
+import com.video45.tools.vid.VideoRecyclerAdapter;
 import com.video45.video45.R;
 
 public class ProfileFeedFragment extends Fragment implements ProfileListener {

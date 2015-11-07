@@ -2,9 +2,7 @@ package com.video45.publicfeed;
 
 import android.os.AsyncTask;
 
-import com.video45.profilefeed.Profile;
-import com.video45.profilefeed.ProfileListener;
-import com.video45.tools.video.Video;
+import com.video45.tools.vid.VideoData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by nicholas on 30/10/15.
  */
-public class PublicFeedTask extends AsyncTask<String, Void, ArrayList<Video>> {
+public class PublicFeedTask extends AsyncTask<String, Void, ArrayList<VideoData>> {
     private PublicFeedListener listener;
 
     public PublicFeedTask(PublicFeedListener listener) {
@@ -28,7 +26,7 @@ public class PublicFeedTask extends AsyncTask<String, Void, ArrayList<Video>> {
     }
 
     @Override
-    protected ArrayList<Video> doInBackground(String... params) {
+    protected ArrayList<VideoData> doInBackground(String... params) {
 
         URL url = null;
         HttpURLConnection conn = null;
@@ -52,7 +50,7 @@ public class PublicFeedTask extends AsyncTask<String, Void, ArrayList<Video>> {
                 if ((boolean) response.get("success")) {
                     JSONArray data = response.getJSONArray("data");
 
-                    ArrayList<Video> videos = new ArrayList<Video>();
+                    ArrayList<VideoData> videos = new ArrayList<VideoData>();
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject video = (JSONObject) data.get(i);
 
@@ -66,7 +64,7 @@ public class PublicFeedTask extends AsyncTask<String, Void, ArrayList<Video>> {
 
                         String videoDate = video.getString("date");
 
-                        videos.add(new Video(title, username, profilePicture, videoUrl, videoDate));
+                        videos.add(new VideoData(title, username, profilePicture, videoUrl, videoDate));
                     }
 
                     return videos;
@@ -80,7 +78,7 @@ public class PublicFeedTask extends AsyncTask<String, Void, ArrayList<Video>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Video> videos) {
+    protected void onPostExecute(ArrayList<VideoData> videos) {
         listener.showPublicFeed(videos);
     }
 }

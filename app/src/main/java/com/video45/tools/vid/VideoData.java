@@ -1,9 +1,9 @@
-package com.video45.tools.video;
+package com.video45.tools.vid;
 
 /**
  * Created by nicholas on 30/10/15.
  */
-public class Video {
+public class VideoData {
 
     private String author;
     private String profilePictureUrl;
@@ -13,7 +13,7 @@ public class Video {
     private String date;
 
 
-    public Video(String title, String author, String profilePictureUrl, String videoUrl, String date) {
+    public VideoData(String title, String author, String profilePictureUrl, String videoUrl, String date) {
         this.title = title;
         this.author = author;
         this.profilePictureUrl = profilePictureUrl;

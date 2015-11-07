@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import com.video45.tools.db.Video45DbHelper;
 import com.video45.tools.db.models.User;
-import com.video45.tools.video.Video;
-import com.video45.tools.video.VideoRecyclerAdapter;
+import com.video45.tools.vid.VideoData;
+import com.video45.tools.vid.VideoRecyclerAdapter;
 import com.video45.video45.R;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class PublicFeedFragment extends Fragment implements PublicFeedListener{
     }
 
     @Override
-    public void showPublicFeed(ArrayList<Video> videos) {
+    public void showPublicFeed(ArrayList<VideoData> videos) {
         RecyclerView recyclerView = (RecyclerView) publicFeedView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new VideoRecyclerAdapter(videos));

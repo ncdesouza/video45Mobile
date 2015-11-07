@@ -1,4 +1,4 @@
-package com.video45.tools.image;
+package com.video45.tools.img;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
