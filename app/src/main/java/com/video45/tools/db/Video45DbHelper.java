@@ -54,6 +54,8 @@ public class Video45DbHelper extends SQLiteOpenHelper {
     public User updateOrCreateUser(User user) {
         User existingUser = getUser(user.getName());
         if (existingUser != null) {
+            existingUser.setToken(user.getToken());
+            updateUserToken(existingUser);
             if (!existingUser.isPrimary()) {
 
                 User primary = getPrimaryUser();
@@ -116,6 +118,18 @@ public class Video45DbHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(UserTable.COLUMN_NAME_PRIMARY, user.isPrimary());
+
+        String selection = UserTable._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(user.getId())};
+
+        return db.update(UserTable.TABLE_NAME, values, selection, selectionArgs);
+    }
+
+    public int updateUserToken(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(UserTable.COLUMN_NAME_TOKEN, user.getToken());
 
         String selection = UserTable._ID + " = ?";
         String[] selectionArgs = { String.valueOf(user.getId())};
