@@ -202,7 +202,7 @@ public class SignUpActivity extends Activity implements SignUpListener{
         mAuthTask = null;
 
         Video45DbHelper db = new Video45DbHelper(getApplicationContext());
-        User user = new User(email.getText().toString(), passOne.getText().toString(), token);
+        User user = new User(username.getText().toString(), email.getText().toString(), passOne.getText().toString(), token);
         db.updateOrCreateUser(user);
 
         Intent successfulSignUp = new Intent();
