@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.video45.StartActivity;
+import com.video45.tools.db.Video45DbHelper;
+import com.video45.tools.db.models.User;
 import com.video45.video45.R;
 
 import java.io.File;
@@ -28,10 +31,14 @@ import java.util.Locale;
 
 /** @author Matthew Rosettis */
 
-public class SignUpActivity extends Activity {
+public class SignUpActivity extends Activity implements SignUpListener{
     ImageView viewImage;
     Button b;
+    private EditText username;
+    private EditText email;
+    private EditText passOne;
     Button continueButton;
+    private SignUpActivityTask mAuthTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,39 +53,11 @@ public class SignUpActivity extends Activity {
                 selectImage();
             }
         });
-        //Setting an onClick for continuing with the sign up process
+        /*//Setting an onClick for continuing with the sign up process
         continueButton = (Button)findViewById(R.id.btnContinueSignUp1);
         continueButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
-                //Retrieving inputted values for username and password
-                EditText username = (EditText) findViewById(R.id.username);
-                EditText passOne = (EditText) findViewById(R.id.passInitial);
-                EditText passTwo = (EditText) findViewById(R.id.passConfirm);
-                //Check if the fields are valid
-                boolean userCheck = validateUser(username.getText().toString());
-                boolean passCheck = validatePass(passOne.getText().toString(), passTwo.getText().toString());
-                //Conditional check to see if all requirements are met
-                if (userCheck && passCheck) {
-                    //TODO Assign the username, password, and picture to an account and add that account to the database
-//                    Intent registered = new Intent(this, PersonalFeed.class);
-//                    startActivity(registered);
-                    Toast.makeText(getApplicationContext(),
-                            "Started from the bottom, now we here",
-                            Toast.LENGTH_SHORT).show();
-                } else if (!passCheck) {
-                    //display in short period of time
-                    Toast.makeText(getApplicationContext(),
-                            "Passwords do not match, try again",
-                            Toast.LENGTH_SHORT).show();
-                } else if (!userCheck) {
-                    //display in short period of time
-                    Toast.makeText(getApplicationContext(),
-                            "Username is invalid, please use only lowercase " +
-                                    "and uppercase letters, numbers, +, -, *, .",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+        });*/
     }
     //Checking that the desired username does not contain
     private boolean validateUser(String username){
@@ -89,10 +68,14 @@ public class SignUpActivity extends Activity {
         }
         return userVerify;
     }
+
+    private boolean validateEmail(String email){
+        return email.contains("@");
+    }
     private boolean validatePass(String passInit, String passCheck){
-        Log.d("password 1",passInit);
-        Log.d("password 2",passCheck);
-        return passInit.equals(passCheck);
+        /*Log.d("password 1",passInit);
+        Log.d("password 2",passCheck);*/
+        return passInit.equals(passCheck) && passInit.length() >= 4;
     }
     private void selectImage() {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
@@ -120,11 +103,45 @@ public class SignUpActivity extends Activity {
                     Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, 2);
                 } else if (options[item].equals("Cancel")) {
-                dialog.dismiss();
+                    dialog.dismiss();
+                }
             }
-        }
         });
         builder.show();
+    }
+
+    public void signUpPressed(View v){
+        //Retrieving inputted values for username and password
+        EditText firstName = (EditText) findViewById(R.id.firstName);
+        EditText lastName = (EditText) findViewById(R.id.lastName);
+        username = (EditText) findViewById(R.id.username);
+        email = (EditText) findViewById(R.id.email_sign_up);
+        passOne = (EditText) findViewById(R.id.passInitial);
+        EditText passTwo = (EditText) findViewById(R.id.passConfirm);
+        //Check if the fields are valid
+        boolean passCheck = validatePass(passOne.getText().toString(), passTwo.getText().toString());
+        boolean emailCheck = validateEmail(email.getText().toString());
+        //Conditional check to see if all requirements are met
+        if (emailCheck && passCheck) {
+            //TODO Assign the name, password, and email to an account and add that account to the database
+            mAuthTask = new SignUpActivityTask(this, firstName.getText().toString(),
+                    lastName.getText().toString(),username.getText().toString(),
+                    email.getText().toString(), passOne.getText().toString());
+            mAuthTask.execute((Void) null);
+            Toast.makeText(getApplicationContext(),
+                    "Started from the bottom, now we here",
+                    Toast.LENGTH_SHORT).show();
+        } else if (!passCheck) {
+            //display in short period of time
+            Toast.makeText(getApplicationContext(),
+                    "Passwords do not match, try again",
+                    Toast.LENGTH_SHORT).show();
+        } else if (!emailCheck) {
+            //display in short period of time
+            Toast.makeText(getApplicationContext(),
+                    "Invalid email address, try again",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -153,7 +170,7 @@ public class SignUpActivity extends Activity {
             }
         }
     }
-    //Attempting to save thier photo to their phone and then display the Full-Sized photo
+    //Attempting to save their photo to their phone and then display the Full-Sized photo
     String photoPath;
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -178,5 +195,39 @@ public class SignUpActivity extends Activity {
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
+    }
+
+    @Override
+    public void success(String token) {
+        mAuthTask = null;
+
+        Video45DbHelper db = new Video45DbHelper(getApplicationContext());
+        User user = new User(email.getText().toString(), passOne.getText().toString(), token);
+        db.updateOrCreateUser(user);
+
+        Intent successfulSignUp = new Intent();
+        successfulSignUp.putExtra(StartActivity.TOKEN, token);
+
+        setResult(RESULT_OK, successfulSignUp);
+        finish();
+    }
+
+    @Override
+    public void failure() {
+        mAuthTask = null;
+
+    }
+
+    @Override
+    public void cancel() {
+        mAuthTask = null;
+        Intent canceledLogin = new Intent();
+        setResult(RESULT_CANCELED, canceledLogin);
+        finish();
+    }
+
+    @Override
+    public String getUrl() {
+        return getString(R.string.dev_url);
     }
 }

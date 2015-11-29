@@ -112,4 +112,6 @@
     <string name="nav_item_logout">Logout</string>
     <string name="action_new_video">New Video</string>
     <string name="action_select_video">Select Video</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
 </resources>

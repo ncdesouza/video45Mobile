@@ -15,18 +15,30 @@
         android:layout_alignParentBottom="true"
         android:layout_height="fill_parent"
         android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_logo"
+        android:contentDescription="@string/logo_content_description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="275dp"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp"
         android:padding="30dp"
         android:text="@string/login"
         android:textColor="@color/textColor"
         android:background="@color/choiceBtn"
         android:onClick="loginPress"
         android:layout_alignParentStart="true" />
+
     <Button
         android:id="@+id/signUpBtn"
         android:padding="30dp"

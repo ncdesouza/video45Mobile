@@ -78,7 +78,7 @@ public class StartActivity extends Activity {
         vidView.setVideoURI(vidUri);
         vidView.start();
 
-        if(vidView.getCurrentPosition()- vidView.getDuration() == 100){
+        if(vidView.getCurrentPosition()- vidView.getDuration() == 800){
             vidView.seekTo(0);
         }
         //Video Loop

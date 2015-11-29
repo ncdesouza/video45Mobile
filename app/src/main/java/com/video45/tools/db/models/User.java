@@ -7,15 +7,25 @@ public class User {
 
     private long id;
     private String name;
+    private String email;
     private String password;
     private String token;
     private boolean primary;
 
-    public User(String name, String password, String token) {
-        this.name = name;
+
+    public User(String email, String password, String token) {
+        this.email = email;
         this.password = password;
         this.token = token;
         this.primary = false;
+
+    }
+
+    public User(String name, String email, String password, String token) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.token = token;
     }
 
     public User(long id, String name, String password, String token, boolean primary) {
@@ -32,6 +42,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getToken() {
