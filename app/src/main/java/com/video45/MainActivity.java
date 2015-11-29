@@ -1,5 +1,6 @@
 package com.video45;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
@@ -16,11 +17,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.video45.video.editor.EditorActivity;
 import com.video45.homefeed.HomeFeedFragment;
 import com.video45.profilefeed.ProfileFeedFragment;
 import com.video45.publicfeed.PublicFeedFragment;
 import com.video45.settings.SettingsFragment;
 import com.video45.tools.tabs.FeedPagerAdapter;
+import com.video45.video.selecter.SelectVideoActivity;
 import com.video45.video45.R;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener{
@@ -98,6 +101,16 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+
+            case R.id.action_new_video:
+                Intent newVideo = new Intent(this, EditorActivity.class);
+                startActivity(newVideo);
+
+            case R.id.action_select_video:
+                Intent getVideo = new Intent(this, SelectVideoActivity.class);
+                startActivity(getVideo);
+
+
             case R.id.action_settings:
                 return true;
         }
