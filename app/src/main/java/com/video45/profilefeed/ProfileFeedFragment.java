@@ -29,8 +29,6 @@ public class ProfileFeedFragment extends Fragment implements ProfileListener {
         return new ProfileFeedFragment();
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,6 +7,7 @@ import android.support.design.widget.NavigationView.OnNavigationItemSelectedList
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -14,9 +15,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.video45.tools.tabs.FragmentPageAdapter;
 import com.video45.video.editor.EditorActivity;
 import com.video45.homefeed.HomeFeedFragment;
 import com.video45.profilefeed.ProfileFeedFragment;
@@ -53,44 +57,65 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         navigationView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getSupportFragmentManager();
-        viewPager = (ViewPager)findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
 
         tabLayout = (TabLayout)findViewById(R.id.tablayout);
-        tabLayout.setupWithViewPager(viewPager);
-        setupTabIcons();
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_language));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_favorite_outline));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_social_person_outline));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+//        tabLayout.setupWithViewPager(viewPager);
+        //setupTabIcons();
+
+        viewPager = (ViewPager)findViewById(R.id.viewpager);
+        FragmentPagerAdapter adapter = new FragmentPageAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+//        setupViewPager(viewPager);
+
 
         // Initial Fragment Setup
-        if (findViewById(R.id.content) != null) {
+        if (findViewById(R.id.viewpager) != null) {
 
             if (savedInstanceState != null) {
                 return;
             }
             ProfileFeedFragment profileFeedFragment = new ProfileFeedFragment();
-
             profileFeedFragment.setArguments(getIntent().getExtras());
-
-
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.content, profileFeedFragment, getResources().getString(R.string.nav_item_profile))
+            fragmentTransaction.add(R.id.viewpager, profileFeedFragment, getResources().getString(R.string.nav_item_profile))
                     .commit();
         }
-
     }
 
-    private void setupTabIcons() {
+    /*private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_action_action_language);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_action_action_favorite_outline);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_action_social_person_outline);
-    }
+    }*/
 
-    private void setupViewPager(ViewPager viewPager) {
+    /*private void setupViewPager(ViewPager viewPager) {
         FeedPagerAdapter adapter = new FeedPagerAdapter(fragmentManager);
         adapter.addFrag(PublicFeedFragment.newInstance(), "Public");
         adapter.addFrag(HomeFeedFragment.newInstance(), "Home");
         adapter.addFrag(ProfileFeedFragment.newInstance(), "Profile");
         viewPager.setAdapter(adapter);
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -151,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         System.out.println(fragTag);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction
-                .replace(R.id.content, fragment)
+                .replace(R.id.viewpager, fragment)
                 .addToBackStack(null)
                 .commit();
     }

@@ -72,11 +72,13 @@ public class SignUpActivity extends Activity implements SignUpListener{
     private boolean validateEmail(String email){
         return email.contains("@");
     }
+
     private boolean validatePass(String passInit, String passCheck){
         /*Log.d("password 1",passInit);
         Log.d("password 2",passCheck);*/
         return passInit.equals(passCheck) && passInit.length() >= 4;
     }
+
     private void selectImage() {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
 
@@ -134,7 +136,7 @@ public class SignUpActivity extends Activity implements SignUpListener{
         } else if (!passCheck) {
             //display in short period of time
             Toast.makeText(getApplicationContext(),
-                    "Passwords do not match, try again",
+                    "Password is too short or passwords do not match, try again",
                     Toast.LENGTH_SHORT).show();
         } else if (!emailCheck) {
             //display in short period of time
