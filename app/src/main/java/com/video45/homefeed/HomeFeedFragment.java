@@ -45,4 +45,9 @@ public class HomeFeedFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_homefeed, container, false);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
+
 }

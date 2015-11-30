@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_language));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_favorite_outline));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_social_person_outline));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+//        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
 //        tabLayout.setupWithViewPager(viewPager);
-        //setupTabIcons();
+//        setupTabIcons();
 
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         FragmentPagerAdapter adapter = new FragmentPageAdapter(getSupportFragmentManager());

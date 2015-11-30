@@ -51,6 +51,16 @@ public class ProfileFeedFragment extends Fragment implements ProfileListener {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        Video45DbHelper db = new Video45DbHelper(getContext());
+        User user = db.getPrimaryUser();
+        db.close();
+
+        getProfile(user.getToken());
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }

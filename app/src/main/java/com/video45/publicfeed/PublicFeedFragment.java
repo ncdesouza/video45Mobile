@@ -55,6 +55,16 @@ public class PublicFeedFragment extends Fragment implements PublicFeedListener{
         return publicFeedView;
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        Video45DbHelper db = new Video45DbHelper(getContext());
+        User user = db.getPrimaryUser();
+        db.close();
+
+        getVideos(user.getToken());
+    }
+
     public void getVideos(String token) {
         String host = getString(R.string.dev_url);
 
