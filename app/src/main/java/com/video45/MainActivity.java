@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.video45.tools.tabs.FragmentPageAdapter;
 import com.video45.video.editor.EditorActivity;
@@ -30,17 +31,19 @@ import com.video45.tools.tabs.FeedPagerAdapter;
 import com.video45.video.selecter.SelectVideoActivity;
 import com.video45.video45.R;
 
-public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity { //implements OnNavigationItemSelectedListener
 
     private DrawerLayout mDrawerLayout;
     private FragmentManager fragmentManager;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private int logoutCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        logoutCount = 0;
 
         // Toolbar Setup
         Toolbar toolbar = (Toolbar)findViewById(R.id.tool_bar);
@@ -48,21 +51,23 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+            //actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+            actionBar.setTitle(R.string.title_activity_main);
+            actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        /*mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
+        navigationView.setNavigationItemSelectedListener(this);*/
         fragmentManager = getSupportFragmentManager();
 
         tabLayout = (TabLayout)findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_language));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_favorite_outline));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_social_person_outline));
-//        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
 //        tabLayout.setupWithViewPager(viewPager);
 //        setupTabIcons();
 
@@ -78,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                logoutCount = 0;
             }
 
             @Override
@@ -123,21 +128,28 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         int id = item.getItemId();
 
         switch (id) {
-            case android.R.id.home:
+            /*case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
-
+                break;*/
             case R.id.action_new_video:
                 Intent newVideo = new Intent(this, EditorActivity.class);
                 startActivity(newVideo);
-
+                logoutCount = 0;
+                break;
             case R.id.action_select_video:
                 Intent getVideo = new Intent(this, SelectVideoActivity.class);
                 startActivity(getVideo);
-
-
+                logoutCount = 0;
+                break;
             case R.id.action_settings:
-                return true;
+                //viewPager.setCurrentItem();
+                SettingsFragment.newInstance("a","b");
+                logoutCount = 0;
+                break;
+            case R.id.action_logout:
+                logoutPressed();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -148,7 +160,20 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         return true;
     }
 
-    @Override
+    public void logoutPressed(){
+        if(logoutCount == 0){
+            Toast.makeText(getApplicationContext(),
+                    "Press again to logout",
+                    Toast.LENGTH_SHORT).show();
+            logoutCount++;
+        }else if(logoutCount >= 1) {
+            logoutCount = 0;
+            startActivity(new Intent(this, StartActivity.class));
+            finish();
+        }
+    }
+
+    /*@Override
     public boolean onNavigationItemSelected(MenuItem item) {
         item.setChecked(true);
         mDrawerLayout.closeDrawers();
@@ -170,16 +195,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 return true;
         }
         return false;
-    }
+    }*/
 
-    private void switchView(Fragment fragment, String fragTag) {
+    /*private void switchView(Fragment fragment, String fragTag) {
         System.out.println(fragTag);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction
                 .replace(R.id.viewpager, fragment)
                 .addToBackStack(null)
                 .commit();
-    }
-
-
+    }*/
 }
