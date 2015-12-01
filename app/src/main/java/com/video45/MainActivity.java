@@ -139,11 +139,11 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
                 startActivity(editVideo);
                 break;
 
-            case R.id.action_new_video:
+            /*case R.id.action_new_video:
                 Intent newVideo = new Intent(this, EditorActivity.class);
                 startActivity(newVideo);
                 logoutCount = 0;
-                break;
+                break;*/
 
             case R.id.action_select_video:
                 Intent getVideo = new Intent(this, SelectVideoActivity.class);

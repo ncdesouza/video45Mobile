@@ -7,11 +7,11 @@
         android:orderInCategory="98"
         android:title="@string/action_settings"
         app:showAsAction="never"/>-->
-    <item
+    <!--<item
         android:id="@+id/action_new_video"
         android:orderInCategory="95"
         android:title="@string/action_new_video"
-        app:showAsAction="never"/>
+        app:showAsAction="never"/>-->
     <item
         android:id="@+id/action_select_video"
         android:orderInCategory="96"

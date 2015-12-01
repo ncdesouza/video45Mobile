@@ -25,7 +25,8 @@ public class FragmentPageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int pos) {
         switch(pos) {
             case 0: return PublicFeedFragment.newInstance();
-            case 1: return HomeFeedFragment.newInstance();
+            case 1: return PublicFeedFragment.newInstance();
+//            case 1: return HomeFeedFragment.newInstance();
             case 2: return ProfileFeedFragment.newInstance();
             case 3: return SettingsFragment.newInstance(null, null);
             default: return ProfileFeedFragment.newInstance();
