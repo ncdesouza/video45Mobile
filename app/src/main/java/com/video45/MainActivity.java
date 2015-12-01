@@ -143,12 +143,16 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
                 logoutCount = 0;
                 break;
             case R.id.action_settings:
-                //viewPager.setCurrentItem();
-                SettingsFragment.newInstance("a","b");
+                viewPager.setCurrentItem(4);
                 logoutCount = 0;
                 break;
+            /*case R.id.action_sign_out:
+                break;*/
             case R.id.action_logout:
                 logoutPressed();
+                break;
+            case R.id.action_search:
+//                searchStart();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -173,6 +177,13 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
         }
     }
 
+    /*public void searchStart(){
+        if(!findViewById(R.id.search_bar_text).isShown()){
+            findViewById(R.id.search_bar_text).setVisibility(View.VISIBLE);
+        }else{
+            findViewById(R.id.search_bar_text).setVisibility(View.INVISIBLE);
+        }
+    }*/
     /*@Override
     public boolean onNavigationItemSelected(MenuItem item) {
         item.setChecked(true);

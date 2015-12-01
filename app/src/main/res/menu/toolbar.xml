@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="99"
+        android:orderInCategory="98"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
     <item
@@ -16,6 +17,11 @@
         android:orderInCategory="96"
         android:title="@string/action_select_video"
         app:showAsAction="never"/>
+    <!--<item
+        android:id="@+id/action_sign_out"
+        android:orderInCategory="99"
+        android:title="@string/nav_item_sign_out"
+        app:showAsAction="never"/>-->
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
@@ -26,7 +32,9 @@
         android:orderInCategory="200"
         android:title="@string/Search"
         android:icon="@drawable/ic_action_action_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom"/>
+
     <!--<item
         android:id="@+id/action_user"
         android:orderInCategory="300"
