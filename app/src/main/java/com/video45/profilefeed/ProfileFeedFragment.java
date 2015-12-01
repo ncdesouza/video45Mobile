@@ -89,6 +89,6 @@ public class ProfileFeedFragment extends Fragment implements ProfileListener {
 
         recyclerView = (RecyclerView) profileView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager((getActivity())));
-        recyclerView.setAdapter(new VideoRecyclerAdapter(profile.getVideos()));
+        recyclerView.setAdapter(new VideoRecyclerAdapter(recyclerView, profile.getVideos()));
     }
 }

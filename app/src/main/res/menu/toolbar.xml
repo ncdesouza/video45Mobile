@@ -41,4 +41,14 @@
         android:title="@string/user"
         android:icon="@drawable/ic_action_social_person_outline"
         app:showAsAction="ifRoom"/>-->
+        android:id="@+id/action_edit_video"
+        android:orderInCategory="96"
+        android:title="@string/action_edit_video"
+        app:showAsAction="never"/>
+    <!--<item-->
+        <!--android:id="@+id/action_user"-->
+        <!--android:orderInCategory="300"-->
+        <!--android:title="@string/user"-->
+        <!--android:icon="@drawable/ic_action_social_person_outline"-->
+        <!--app:showAsAction="ifRoom"/>-->
 </menu>

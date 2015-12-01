@@ -34,6 +34,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name="com.video45.signup.SignUpActivity"
@@ -55,7 +56,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.video45.StartActivity" />
         </activity>
-        <activity android:name="com.video45.video.editor.EditorActivity" />
+        <activity android:name="com.video45.video.editor.EditorActivity">
+        </activity>
         <activity android:name="com.video45.video.selecter.SelectVideoActivity"></activity>
     </application>
 
