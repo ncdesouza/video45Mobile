@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.video45.tools.tabs.FragmentPageAdapter;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_language));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_favorite_outline));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_social_person_outline));
-        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_settings));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 //        tabLayout.setupWithViewPager(viewPager);
@@ -149,10 +150,10 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
                 startActivity(getVideo);
                 logoutCount = 0;
                 break;
-            case R.id.action_settings:
-//                viewPager.setCurrentItem();
+            /*case R.id.action_settings:
+                viewPager.setCurrentItem(3);
                 logoutCount = 0;
-                break;
+                break;*/
             /*case R.id.action_sign_out:
                 break;*/
             case R.id.action_logout:
