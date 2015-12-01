@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
 //        setupTabIcons();
 
         viewPager = (ViewPager)findViewById(R.id.viewpager);
-        FragmentPagerAdapter adapter = new FragmentPageAdapter(getSupportFragmentManager());
+        FragmentPageAdapter adapter = new FragmentPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
                 logoutCount = 0;
                 break;
             case R.id.action_settings:
-                viewPager.setCurrentItem(4);
+                viewPager.setCurrentItem(3);
                 logoutCount = 0;
                 break;
             /*case R.id.action_sign_out:

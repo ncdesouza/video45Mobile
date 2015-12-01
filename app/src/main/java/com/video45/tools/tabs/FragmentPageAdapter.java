@@ -14,8 +14,8 @@ import com.video45.settings.SettingsFragment;
  * Created by Matthew on 11/29/2015.
  */
 public class FragmentPageAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] {"Public Feed","Home Feed","Profile Feed"};
+    final int PAGE_COUNT = 4;
+    private String tabTitles[] = new String[] {"Public Feed","Home Feed","Profile Feed","Settings"};
 
     public FragmentPageAdapter(FragmentManager fm) {
         super(fm);
@@ -27,7 +27,7 @@ public class FragmentPageAdapter extends FragmentPagerAdapter {
             case 0: return PublicFeedFragment.newInstance();
             case 1: return HomeFeedFragment.newInstance();
             case 2: return ProfileFeedFragment.newInstance();
-            case 3: return SettingsFragment.newInstance("a", "b");
+            case 3: return SettingsFragment.newInstance(null, null);
             default: return ProfileFeedFragment.newInstance();
         }
     }
