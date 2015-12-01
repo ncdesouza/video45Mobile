@@ -66,7 +66,7 @@ public class PublicFeedFragment extends Fragment implements PublicFeedListener{
     public void showPublicFeed(ArrayList<Video> videos) {
         RecyclerView recyclerView = (RecyclerView) publicFeedView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new VideoRecyclerAdapter(videos));
+        recyclerView.setAdapter(new VideoRecyclerAdapter(recyclerView, videos));
     }
 
 }

@@ -1,13 +1,22 @@
 package com.video45.video.editor;
 
+import android.content.ClipData;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
 import android.graphics.SurfaceTexture;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
 import com.video45.video45.R;
@@ -20,8 +29,7 @@ public class EditorActivity extends AppCompatActivity implements TextureView.Sur
     private MediaPlayer player;
     private VideoTextureRenderer renderer;
 
-    private GridLayout videoTrack;
-    private GridLayout audioTrack;
+    private GridLayout tracks;
 
     private int surfaceWidth;
     private int surfaceHeight;
@@ -35,31 +43,36 @@ public class EditorActivity extends AppCompatActivity implements TextureView.Sur
         surface = (TextureView) findViewById(R.id.surface);
         surface.setSurfaceTextureListener(this);
 
-        videoTrack = (GridLayout)findViewById(R.id.track_video);
-        for (int i = 0; i < videoTrack.getColumnCount(); i++) {
+        tracks = (GridLayout)findViewById(R.id.tracks);
+        int numberOfSeconds = 5*60;
+        tracks.setColumnCount(numberOfSeconds);
+        tracks.setRowCount(3);
+        tracks.setRowOrderPreserved(true);
+        
+        for (int i = 0; i < tracks.getColumnCount(); i++) {
             TextView time = new TextView(this);
             String timeStr;
-            if (i%5==0)
-                timeStr = String.valueOf((int)(i / 60.0)) + ":" + String.valueOf((int)((i % 60)*100));
-            else
-                timeStr = " ";
-
+            timeStr = String.format("%02d:%02d", (int)(i / 60.0), (i%60));
             time.setText(timeStr);
-            videoTrack.addView(time, i);
-        }
-
-        audioTrack = (GridLayout)findViewById(R.id.track_audio);
-        for (int i = 0; i < audioTrack.getColumnCount(); i++) {
-            TextView time = new TextView(this);
-            String timeStr;
+            time.setBackgroundColor(Color.DKGRAY);
+            time.setTextColor(Color.WHITE);
             if (i%5==0)
-                timeStr = String.valueOf((int)(i / 60.0)) + ":" + String.valueOf((int)((i % 60)*100));
+                time.setVisibility(View.VISIBLE);
             else
-                timeStr = " ";
+                time.setVisibility(View.INVISIBLE);
 
-            time.setText(timeStr);
-            audioTrack.addView(time, i);
+//            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+//            params.rowSpec = GridLayout.spec(1);
+//            params.columnSpec = GridLayout.spec(i, 1, 1/(float)numberOfSeconds);
+//            time.setLayoutParams(params);
+            tracks.addView(time, new GridLayout.LayoutParams(
+                    GridLayout.spec(1),
+                    GridLayout.spec(i, 1, 1/(float)numberOfSeconds))
+            );
         }
+        tracks.addView(new Space(this), new GridLayout.LayoutParams(
+                GridLayout.spec(2),
+                GridLayout.spec(0, 1, 1/(float)numberOfSeconds)));
 
     }
 
@@ -95,7 +108,7 @@ public class EditorActivity extends AppCompatActivity implements TextureView.Sur
             }
 
             player.setSurface(new Surface(renderer.getVideoTexture()));
-            player.setLooping(true);
+//            player.setLooping(true);
             player.prepare();
             player.setVolume(85, 85);
             renderer.setVideoSize(player.getVideoWidth(), player.getVideoHeight());

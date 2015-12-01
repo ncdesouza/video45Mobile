@@ -17,10 +17,12 @@ import java.util.ArrayList;
  */
 public class VideoRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
+    private RecyclerView recyclerView;
     private ArrayList<Video> videos;
 
-    public VideoRecyclerAdapter(ArrayList<Video> videos) {
+    public VideoRecyclerAdapter(RecyclerView  recyclerView, ArrayList<Video> videos) {
         this.videos = videos;
+        this.recyclerView = recyclerView;
     }
 
     @Override
@@ -41,6 +43,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         holder.lblAuthor.setText(video.getAuthor());
 
         VideoPlayer videoPlayer = new VideoPlayer(holder.videoSurface, video.getVideoUrl());
+//        recyclerView.addOnChildAttachStateChangeListener(videoPlayer);
 
         holder.date.setText(video.getDate());
         holder.lblTitle.setText(video.getTitle());
