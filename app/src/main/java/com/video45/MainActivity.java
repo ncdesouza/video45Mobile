@@ -132,11 +132,13 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
         switch (id) {
             /*case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
+                logoutCount = 0;
                 return true;*/
 
             case R.id.action_edit_video:
                 Intent editVideo = new Intent(this, EditorActivity.class);
                 startActivity(editVideo);
+                logoutCount = 0;
                 break;
 
             /*case R.id.action_new_video:
