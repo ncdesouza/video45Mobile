@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_language));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_action_favorite_outline));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_action_social_person_outline));
+        tabLayout.addTab(tabLayout.newTab());
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 //        tabLayout.setupWithViewPager(viewPager);
@@ -130,31 +131,26 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
         switch (id) {
             /*case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
+                return true;*/
 
             case R.id.action_edit_video:
                 Intent editVideo = new Intent(this, EditorActivity.class);
                 startActivity(editVideo);
                 break;
 
-                break;*/
             case R.id.action_new_video:
                 Intent newVideo = new Intent(this, EditorActivity.class);
                 startActivity(newVideo);
-                break;
-
                 logoutCount = 0;
                 break;
+
             case R.id.action_select_video:
                 Intent getVideo = new Intent(this, SelectVideoActivity.class);
                 startActivity(getVideo);
-                break;
-
-
                 logoutCount = 0;
                 break;
             case R.id.action_settings:
-                viewPager.setCurrentItem(3);
+//                viewPager.setCurrentItem();
                 logoutCount = 0;
                 break;
             /*case R.id.action_sign_out:
