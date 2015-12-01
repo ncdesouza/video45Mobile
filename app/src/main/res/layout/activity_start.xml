@@ -20,52 +20,74 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"/>
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/ic_logo"
-        android:contentDescription="@string/logo_content_description"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
 
-    <LinearLayout
+
+
+    <RelativeLayout
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        android:layout_height="match_parent" >
 
-        <Button
-            android:id="@+id/loginBtn"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:padding="30dp"
-            android:text="@string/login"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:background="@color/choiceBtn"
-            android:onClick="loginPress"/>
+            android:layout_height="350sp"
+            android:id="@+id/relativeLayout">
+            <!--android:background="@color/signUpBtn"-->
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_logo"
+                android:contentDescription="@string/logo_content_description"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/imageView" />
+                <!--android:layout_marginTop="50dp" -->
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout"
+            android:layout_below="@+id/relativeLayout">
 
-        <!--android:layout_marginTop="400dp"-->
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:padding="30dp"
+                android:text="@string/login"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@color/choiceBtn"
+                android:onClick="loginPress"/>
+
+            <!--android:layout_marginTop="400dp"-->
 
 
-        <Button
-            android:id="@+id/signUpBtn"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
-            android:padding="30dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/signUp"
-            android:textColor="@color/textColor"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:background="@color/black"
-            android:onClick="signUpPress"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/signUpBtn"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                android:padding="30dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/signUp"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@color/black"
+                android:onClick="signUpPress"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
 </RelativeLayout>
 
