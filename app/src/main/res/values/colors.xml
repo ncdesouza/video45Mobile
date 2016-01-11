@@ -8,4 +8,7 @@
     <color name="signUpBtn">#BD180B</color>
     <color name="choiceBtn">#C1BA57</color>
     <color name="black">#000000</color>
+    <color name="blue">#303F9F</color> <!--Facebook Colour-->
+    <color name="babyBlue">#3FF0CF</color> <!--Twitter Colour-->
+    <color name="red">#F00F00</color> <!--Google Plus Colour-->
 </resources>

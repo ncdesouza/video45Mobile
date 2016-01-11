@@ -43,7 +43,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.95"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -68,7 +68,8 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="300dp"
-            android:scrollIndicators="none">
+            android:scrollbars="none">
+            <!--android:scrollIndicators="none"-->
             <!--android:layout_marginStart="@dimen/start_margin"-->
 
 
@@ -80,11 +81,32 @@
                 <!--android:id="@+id/videoPlayer"-->
                 <!--android:layout_alignParentEnd="true"-->
                 <!--android:layout_alignParentStart="true" />-->
-
             <SurfaceView
                 android:id="@+id/videoview"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+                android:layout_height="fill_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:id="@+id/muteButton"
+                android:background="@drawable/scaled_speaker"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@id/videoview"
+                android:layout_alignStart="@id/videoview"
+                android:onClick="soundPlay"/>
+
+            <Button
+                android:id="@+id/restartButton"
+                android:background="@drawable/ic_action_av_fast_rewind"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@id/videoview"
+                android:layout_alignEnd="@id/videoview"
+                android:onClick="restartVideo"/>
+
+
 
         </RelativeLayout>
 

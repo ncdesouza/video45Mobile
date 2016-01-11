@@ -47,7 +47,7 @@ public class VideoPlayer implements Callback, OnPreparedListener {
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+        inFocus = vidHolder.getSurfaceFrame().top <= 50 && vidHolder.getSurfaceFrame().bottom >= height - 50;
     }
 
     @Override
@@ -62,6 +62,7 @@ public class VideoPlayer implements Callback, OnPreparedListener {
             @Override
             public void run() {
                 play();
+                pause();
             }
         }).start();
 

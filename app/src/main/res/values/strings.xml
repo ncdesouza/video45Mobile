@@ -21,11 +21,13 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing emailcompletions."</string>
-    <string name="dev_user">user1@test.com</string>
-    <string name="dev_password">test</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="dev_user">matthew.rosettis@gmail.com</string>
+    <string name="dev_password">video45Dev</string>
     <string name="dev_url">http://video45.cloudapp.net</string>
     <!--<string name="dev_url">http://10.0.2.2:5000</string>-->
+    <string name="remember_user">Keep Me Logged In</string>
+    <!--Strings related to the Menu Bar-->
     <string name="profile_picture_content_description">profile picture</string>
     <string name="nav_open">open</string>
     <string name="nav_close">close</string>

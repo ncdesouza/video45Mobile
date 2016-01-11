@@ -1,6 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -12,6 +14,7 @@
 
     <!-- Login progress -->
     <LinearLayout
+        android:id="@+id/loginLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -60,6 +63,57 @@
 
             </LinearLayout>
         </ScrollView>
+        <LinearLayout
+            android:id="@+id/constantLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/rememberCheckBox"
+                android:padding="2dp"
+                android:onClick="rememberUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remember_user" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80sp" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/facebookFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/constantLogin"
+        app:layout_anchorGravity="bottom|left|start"
+        app:backgroundTint="@color/blue"
+        android:src="@drawable/ic_action_maps_local_post_office"
+        android:padding="10dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/twitterFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/constantLogin"
+        app:layout_anchorGravity="bottom|center"
+        app:backgroundTint="@color/babyBlue"
+        android:src="@drawable/ic_action_image_blur_on"
+        android:padding="10dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/googlePlusFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/constantLogin"
+        app:layout_anchorGravity="bottom|right|end"
+        app:backgroundTint="@color/red"
+        android:src="@drawable/ic_action_action_search"
+        android:padding="10dp"/>
+</android.support.design.widget.CoordinatorLayout>

@@ -2,6 +2,7 @@ package com.video45;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.design.widget.TabLayout;
@@ -18,11 +19,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.video45.tools.tabs.FragmentPageAdapter;
+import com.video45.tools.video.Video;
+import com.video45.tools.video.VideoPlayer;
 import com.video45.video.editor.EditorActivity;
 import com.video45.homefeed.HomeFeedFragment;
 import com.video45.profilefeed.ProfileFeedFragment;
@@ -57,6 +62,10 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        /*//Adding a FAM for adding new videos
+        FloatingActionButton newVidFab = new FloatingActionButton(this);
+        newVidFab.show();*/
 
         /*mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
@@ -186,6 +195,8 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
             finish();
         }
     }
+
+
 
     /*public void searchStart(){
         if(!findViewById(R.id.search_bar_text).isShown()){
