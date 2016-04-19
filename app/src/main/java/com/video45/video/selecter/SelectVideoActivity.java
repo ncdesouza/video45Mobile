@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.video45.video45.R;
+import com.video45.R;
 
 public class SelectVideoActivity extends AppCompatActivity {
 

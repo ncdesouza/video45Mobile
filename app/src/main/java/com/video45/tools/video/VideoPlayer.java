@@ -58,19 +58,17 @@ public class VideoPlayer implements Callback, OnPreparedListener {
     public void onPrepared(MediaPlayer mp) {
         ready = true;
         inFocus = true;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                play();
-            }
-        }).start();
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                play();
+//            }
+//        }).start();
 
     }
 
     public void play() {
-        while (!ready && inFocus) {
-
-        }
         if (ready && !mediaPlayer.isPlaying())
             mediaPlayer.start();
     }

@@ -30,7 +30,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.video45.StartActivity;
-import com.video45.video45.R;
+import com.video45.R;
 import com.video45.tools.db.Video45DbHelper;
 import com.video45.tools.db.models.User;
 

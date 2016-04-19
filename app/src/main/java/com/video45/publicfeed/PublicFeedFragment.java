@@ -13,7 +13,7 @@ import com.video45.tools.db.Video45DbHelper;
 import com.video45.tools.db.models.User;
 import com.video45.tools.video.Video;
 import com.video45.tools.video.VideoRecyclerAdapter;
-import com.video45.video45.R;
+import com.video45.R;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.video45.video45.R;
+import com.video45.R;
 
 /**
  * A simple {@link Fragment} subclass.

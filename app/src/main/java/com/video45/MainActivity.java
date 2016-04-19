@@ -2,38 +2,29 @@ package com.video45;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.video45.profilefeed.ProfileFeedFragment;
 import com.video45.tools.tabs.FragmentPageAdapter;
 import com.video45.video.editor.EditorActivity;
-import com.video45.homefeed.HomeFeedFragment;
-import com.video45.profilefeed.ProfileFeedFragment;
-import com.video45.publicfeed.PublicFeedFragment;
-import com.video45.settings.SettingsFragment;
-import com.video45.tools.tabs.FeedPagerAdapter;
 import com.video45.video.selecter.SelectVideoActivity;
-import com.video45.video45.R;
+import com.video45.videoeditor.VideoEditorActivity;
 
 public class MainActivity extends AppCompatActivity { //implements OnNavigationItemSelectedListener
 
+    private FloatingActionButton fab;
     private DrawerLayout mDrawerLayout;
     private FragmentManager fragmentManager;
     private TabLayout tabLayout;
@@ -45,6 +36,15 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         logoutCount = 0;
+
+        fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), VideoEditorActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Toolbar Setup
         Toolbar toolbar = (Toolbar)findViewById(R.id.tool_bar);
@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
             case R.id.action_edit_video:
                 Intent editVideo = new Intent(this, EditorActivity.class);
                 startActivity(editVideo);
+                this.finish();
                 break;
 
             /*case R.id.action_new_video:
@@ -148,6 +149,7 @@ public class MainActivity extends AppCompatActivity { //implements OnNavigationI
             case R.id.action_select_video:
                 Intent getVideo = new Intent(this, SelectVideoActivity.class);
                 startActivity(getVideo);
+                this.finish();
                 logoutCount = 0;
                 break;
             /*case R.id.action_settings:

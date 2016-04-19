@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.video45.video45.R;
+import com.video45.R;
 
 /**
  * Created by nicholas on 05/11/15.

@@ -8,7 +8,6 @@ import android.view.View;
 import android.net.Uri;
 import android.widget.VideoView;
 
-import com.video45.video45.R;
 import com.video45.login.LoginActivity;
 import com.video45.signup.SignUpActivity;
 
@@ -71,23 +70,26 @@ public class StartActivity extends Activity {
         vidView = (VideoView)findViewById(R.id.menuVideo);
         //TODO Add more videos and implement looping
         vidAddress[0] =
-                "http://video45.cloudapp.net/public/vid/dock.mp4";
+                "http://video45.cloudapp.net/public/vid/YouTube Rewind Now Watch Me 2015  YouTubeRewind.mp4";
         vidAddress[1]=
                 "http://video45.cloudapp.net/public/vid/river.mp4";
         Uri vidUri = Uri.parse(vidAddress[0]);
         vidView.setVideoURI(vidUri);
-        vidView.start();
+
+        vidView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                //vidView.seekTo(0);
+                vidView.start(); //need to make transition seamless.
+                mp.setVolume(0, 0);
+
+            }
+        });
 
         if(vidView.getCurrentPosition()- vidView.getDuration() == 800){
             vidView.seekTo(0);
         }
         //Video Loop
-        vidView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-                //vidView.seekTo(0);
-                vidView.start(); //need to make transition seamless.
-            }
-        });
+
     }
 
 }
